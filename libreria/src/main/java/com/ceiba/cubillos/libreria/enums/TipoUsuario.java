@@ -23,6 +23,6 @@ public enum TipoUsuario {
             }
         }
 
-        throw new IllegalArgumentException("Tipo de usuario no válido: " + id);
+        throw new IllegalArgumentException("Tipo de usuario no es válido: " + id);
     }
 }

@@ -26,13 +26,13 @@ public class PrestamoServiceImpl implements PrestamoService {
     public PrestamoResponse crearPrestamo(PrestamoRequest request) {
         TipoUsuario tipoUsuario;
         try {
-            // Validar y obtener el Enum TipoUsuario
+            
             tipoUsuario = TipoUsuario.fromId(request.tipoUsuario());
         } catch (IllegalArgumentException e) {
             throw new TipoUsuarioNoPermitidoException("Tipo de usuario no permitido en la biblioteca");
         }
 
-        // Validar si es usuario invitado
+        
         if (tipoUsuario == TipoUsuario.INVITADO) {
             boolean yaTienePrestamo = prestamoRepository.existsByIdentificacionUsuarioAndTipoUsuario(
                     request.identificacionUsuario(), TipoUsuario.INVITADO);
@@ -43,15 +43,14 @@ public class PrestamoServiceImpl implements PrestamoService {
                 );
             }
         }
-
-        // Calcular fecha máxima de devolución
+        
         LocalDate fechaMaximaDevolucion = calcularFechaDevolucion(tipoUsuario);
 
-        // Crear la entidad Prestamo
+        
         Prestamo nuevoPrestamo = Prestamo.builder()
                 .isbn(request.isbn())
                 .identificacionUsuario(request.identificacionUsuario())
-                .tipoUsuario(tipoUsuario) // Guardamos el Enum
+                .tipoUsuario(tipoUsuario)
                 .fechaMaximaDevolucion(fechaMaximaDevolucion)
                 .build();
 
@@ -75,7 +74,7 @@ public class PrestamoServiceImpl implements PrestamoService {
                 .id(prestamo.getId())
                 .isbn(prestamo.getIsbn())
                 .identificacionUsuario(prestamo.getIdentificacionUsuario())
-                .tipoUsuario(prestamo.getTipoUsuario().getId()) // Devolvemos el ID numérico
+                .tipoUsuario(prestamo.getTipoUsuario().getId())
                 .fechaMaximaDevolucion(DateUtils.formatLocalDate(prestamo.getFechaMaximaDevolucion()))
                 .build();
     }
