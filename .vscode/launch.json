@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LibreriaApplication<libreria>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ceiba.cubillos.libreria.LibreriaApplication",
+            "projectName": "libreria",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
